@@ -9,7 +9,7 @@ module.exports = {
     module: {
         rules: [
             {
-                test: /\.m?js$|\.mjsx$/,
+                test: /\.m?js$|\.m?jsx$/,
                 exclude: /(node_modules|bower_components)/,
                 include: path.join(__dirname, '/client/src'),
                 use: {
