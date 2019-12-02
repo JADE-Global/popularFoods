@@ -29,15 +29,20 @@ const dataGenerators = {
             reviewsnumber: Math.floor(Math.random() * 101)
         }
         return newUser;
-    }
+    },
+    // makeReview: function() {
+    //     const newReview = {
+
+    //     }
+    // }
 }
-const seedQueries = {
-    seedUser: function (userQuantity) {
+    // const seedQueries = {
+    //     seedUser: function (userQuantity) {
 
-    }
+    //     }
 
-}
+    // }
 
-    `https://source.unsplash.com/random?food`
+    // `https://source.unsplash.com/random?food`
 
 
