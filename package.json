@@ -2,9 +2,12 @@
   "name": "popularFoods",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack -w -d",
+    "start": "nodemon ./server/server.js",
+    "start:debug": "nodemon --inspect ./server/server.js"
   },
   "repository": {
     "type": "git",
@@ -22,6 +25,7 @@
     "@babel/preset-env": "^7.7.4",
     "@babel/preset-react": "^7.7.4",
     "babel-loader": "^8.0.6",
+    "faker": "^4.1.0",
     "webpack": "^4.41.2",
     "webpack-cli": "^3.3.10"
   },
@@ -29,6 +33,8 @@
     "body-parser": "^1.19.0",
     "cors": "^2.8.5",
     "express": "^4.17.1",
+    "mysql": "^2.17.1",
+    "mysql2": "^2.0.1",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
     "sequelize": "^5.21.2"

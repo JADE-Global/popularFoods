@@ -1,19 +1,22 @@
 const path = require('path');
 
 module.exports = {
-    entry: './client/src/index.js',
+    entry: path.join(__dirname, '/client/src/index.jsx'),
     output: {
         filename: 'bundle.js',
         path: path.join(__dirname, '/client/public')
     },
     module: {
-        rues: [
+        rules: [
             {
                 test: /\.m?js$|\.mjsx$/,
                 exclude: /(node_modules|bower_components)/,
-                use: 'babel-loader',
-                options: {
-                    presets: ['@babel/preset-env', '@babel/preset-react']
+                include: path.join(__dirname, '/client/src'),
+                use: {
+                    loader: 'babel-loader',
+                    options: {
+                        presets: ['@babel/preset-env', '@babel/preset-react']
+                    }
                 }
             }
         ]
