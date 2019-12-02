@@ -45,14 +45,14 @@ const dataGenerators = {
 }
 
 const seedTable = function (entryNumber, makeFunction, table) {
-    let unsproutedSeeds = [];
+    let promises = [];
     for (let i = 0; i < entryNumber; i++) {
         let dataObject = makeFunction();
-        unsproutedSeeds.push(
+        promises.push(
             table.create(dataObject)
         )
     }
-    Promise.all(unsproutedSeeds)
+    Promise.all(promises)
         .then((data) => {
             console.log(`successfully updated table: ${table} with the following: ${data}`)
         })
