@@ -4,7 +4,7 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest",
     "build": "webpack -w -d",
     "seed": "node ./database/seed.js",
     "start": "nodemon ./server/server.js",
@@ -25,8 +25,14 @@
     "@babel/core": "^7.7.4",
     "@babel/preset-env": "^7.7.4",
     "@babel/preset-react": "^7.7.4",
+    "babel-jest": "^24.9.0",
     "babel-loader": "^8.0.6",
+    "enzyme": "^3.10.0",
+    "enzyme-adapter-react-16": "^1.15.1",
     "faker": "^4.1.0",
+    "jest": "^24.9.0",
+    "nodemon": "^2.0.1",
+    "react-test-render": "^1.1.2",
     "webpack": "^4.41.2",
     "webpack-cli": "^3.3.10"
   },
