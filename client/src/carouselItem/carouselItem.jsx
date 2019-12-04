@@ -2,9 +2,9 @@ import React from 'react'
 import styles from './carouselItem.module.css';
 
 
-const CarouselItem = ({ imageUrl, price, name, photoNumber, reviewNumber, displayModal }) => {
+const CarouselItem = ({ last, imageUrl, price, name, photoNumber, reviewNumber, displayModal }) => {
     return (
-        <div className={styles.container} onClick={displayModal}>
+        <div className={last ? `${styles.container} ${styles.last}` : styles.container} onClick={displayModal}>
             <div className={styles.foodImage} style={{ backgroundImage: `url(${imageUrl})` }} >
                 <div className={styles.price}>${price}</div>
             </div>

@@ -1,4 +1,5 @@
 import React from 'react';
+import regeneratorRuntime from "regenerator-runtime";
 import { shallow, mount, render } from 'enzyme';
 
 import Carousel from './carousel.jsx';
@@ -9,10 +10,14 @@ describe('<Carousel />', () => {
         const wrapper = shallow(<Carousel />);
         expect(wrapper.exists()).toEqual(true);
     }),
-        it('should render the carouselItem components', () => {
+        it('should render the carouselItem components', async () => {
             const wrapper = shallow(<Carousel />);
+            CarouselItem.displayName = 'CarouselItem';
+            const waitForAsync = () => new Promise(resolve => setImmediate(resolve));
+            await waitForAsync();
+            wrapper.update();
             wrapper.setState({
-                popularDishes: [{
+                dishes: [{
                     imageUrl: 'https://source.unsplash.com/random',
                     price: 8.29,
                     name: 'Galvanize',
@@ -33,6 +38,7 @@ describe('<Carousel />', () => {
                 }
                 ]
             });
-            expect(wrapper.find(CarouselItem)).to.have.lengthOf(3);
+            wrapper.update();
+            expect(wrapper.find('CarouselItem').length).toBe(3);
         })
 });

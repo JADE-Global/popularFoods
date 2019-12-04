@@ -35,6 +35,13 @@ module.exports = {
                     name: 'cohort124',
                     photoNumber: 15,
                     reviewNumber: 20
+                },
+                {
+                    imageUrl: 'https://source.unsplash.com/random',
+                    price: 50.59,
+                    name: 'test',
+                    photoNumber: 1,
+                    reviewNumber: 2
                 }
                 ]
             }))

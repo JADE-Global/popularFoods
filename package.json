@@ -36,6 +36,7 @@
     "faker": "^4.1.0",
     "jest": "^24.9.0",
     "jest-css-modules": "^2.1.0",
+    "node-fetch": "^2.6.0",
     "nodemon": "^2.0.1",
     "react-test-render": "^1.1.2",
     "regenerator-runtime": "^0.13.3",

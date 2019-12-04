@@ -1,0 +1,35 @@
+.container {
+    width: 605px;
+    height: 229px;
+    padding-top:24px;
+    border-top: 1px  solid rgb(230, 230, 230);
+    margin-top:24px;
+   
+}
+.titleContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+.itemContainer {
+    width: 605px;
+    height:196px;
+    padding-right:4px;
+    padding-left:4px;
+    display: flex;
+    flex-direction: row;
+    overflow:auto;
+    -ms-overflow-style:none;
+}
+.itemContainer::-webkit-scrollbar {
+    display: none;
+}
+
+.fakeLink {
+    color:#0073bb;
+    cursor:pointer;
+}
+.fakeLink:hover{
+    text-decoration: underline;
+}
