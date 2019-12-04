@@ -35,4 +35,4 @@ describe('<Carousel />', () => {
             });
             expect(wrapper.find(CarouselItem)).to.have.lengthOf(3);
         })
-})
+});
