@@ -5,7 +5,7 @@ import Carousel from './carousel.jsx';
 import CarouselItem from '../carouselItem/carouselItem.jsx';
 
 describe('<Carousel />', () => {
-    it('contains "hello world', () => {
+    it('it should exist', () => {
         const wrapper = shallow(<Carousel />);
         expect(wrapper.exists()).toEqual(true);
     }),

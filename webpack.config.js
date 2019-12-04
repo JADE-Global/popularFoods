@@ -1,4 +1,5 @@
 const path = require('path');
+require("regenerator-runtime/runtime");
 
 module.exports = {
     entry: path.join(__dirname, '/client/src/index.jsx'),
@@ -15,7 +16,8 @@ module.exports = {
                 use: {
                     loader: 'babel-loader',
                     options: {
-                        presets: ['@babel/preset-env', '@babel/preset-react']
+                        presets: ['@babel/preset-env', '@babel/preset-react'],
+                        plugins: ['@babel/plugin-transform-runtime']
                     }
                 }
             },
