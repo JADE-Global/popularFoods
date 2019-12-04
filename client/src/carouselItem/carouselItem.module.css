@@ -1,0 +1,73 @@
+.container {
+    width:192px;
+    height:186px;
+    border-radius: 4px;
+    cursor:pointer;
+    transition: box-shadow 0.2s ease-in;
+}
+.container:hover {
+    box-shadow: 1px 0 2px 2px rgba(230, 230, 230, 0.8), -1px 0 2px 2px rgba(230, 230, 230, 0.8); 
+}
+
+.contentContainer {
+    width: 166px;
+    height: 42px;
+    border-radius: 0px 0px 4px 4px;
+    padding: 12px;
+    border: 1px solid rgb(230, 230, 230);
+    cursor:pointer;
+}
+
+.foodImage {
+    background-size: 212px 206px;
+    background-repeat: no-repeat;
+    border-radius: 4px 4px 0px 0px;
+    width:192px;
+    height:120px;
+    display:grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 12px;
+    grid-template-rows: 1fr 1fr 1fr 1fr 12px;
+    grid-template-areas:
+    '. . . . .'
+    '. . . . .'
+    '. . . . .'
+    '. . . price .'
+    '. . . . .';
+    cursor:pointer;
+
+}
+
+.price {
+    background-color: rgba(51, 51, 51, 0.75);
+    color: white;
+    border-radius: 4px;
+    padding: 3px 6px;
+    grid-area: price;
+    cursor:pointer;
+
+}
+.name {
+    margin:0px;
+    cursor:pointer;
+
+}
+
+.flexRow {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    color:#999;
+    cursor:pointer;
+
+}
+
+.photoNumber {
+    margin-right:4px;
+    font-size: small;
+}
+
+.reviewNumber {
+    font-size: small;
+    cursor:pointer;
+
+}
