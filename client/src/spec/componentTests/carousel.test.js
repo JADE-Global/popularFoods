@@ -2,8 +2,9 @@ import React from 'react';
 import regeneratorRuntime from "regenerator-runtime";
 import { shallow, mount, render } from 'enzyme';
 
-import Carousel from './carousel.jsx';
-import CarouselItem from '../carouselItem/carouselItem.jsx';
+
+import Carousel from "../../components/carousel/carousel.jsx";
+import CarouselItem from '../../components/carouselItem/carouselItem.jsx';
 
 describe('<Carousel />', () => {
     it('it should exist', () => {
@@ -38,7 +39,36 @@ describe('<Carousel />', () => {
                 }
                 ]
             });
-            wrapper.update();
             expect(wrapper.find('CarouselItem').length).toBe(3);
+        }),
+        it('should fetch data with componentDidMount and render subcomponents', async () => {
+            const wrapper = shallow(<Carousel />);
+            CarouselItem.displayName = 'CarouselItem';
+            setTimeout(() => {
+                wrapper.update();
+                expect(wrapper.find('CarouselItem').length).toBe(4);
+            }, 2000)
+        })
+    it('should update maxScrollLength of state after componentDidMount triggers subcomponent render', async () => {
+        const wrapper = shallow(<Carousel />);
+        setTimeout(() => {
+            wrapper.update();
+            expect(wrapper.state('maxScrollLength').length).toBeGreaterThan(0);
+        }, 2000)
+    }),
+        it('should not have the "Scroll Right" button rendered right away', async () => {
+            const wrapper = shallow(<Carousel />);
+            setTimeout(() => {
+                wrapper.update();
+                expect(wrapper.exists('button').text(('Scroll Right'))).toBeFalsy();
+
+            }, 2000)
+        }),
+        it('should have the "Scroll Left" button rendered right away', async () => {
+            const wrapper = shallow(<Carousel />);
+            setTimeout(() => {
+                wrapper.update();
+                expect(wrapper.exists('button').text(('Scroll Left'))).toBeTruthy();
+            }, 2000)
         })
 });
