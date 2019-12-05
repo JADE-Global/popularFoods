@@ -13,9 +13,12 @@ class Carousel extends Component {
             dishToDisplay: '',
             scrollPosition: 0,
             maxScrollLength: 0,
+            debounceTimer: 0
         }
         this.scrollLeft = this.scrollLeft.bind(this);
         this.scrollRight = this.scrollRight.bind(this);
+        this.handleScroll = this.handleScroll.bind(this);
+        this.debounceScroll = this.debounceScroll.bind(this);
     }
 
     async componentDidMount() {
@@ -26,10 +29,33 @@ class Carousel extends Component {
             const newMaxScrollLength = scrollContainer.scrollWidth - scrollContainer.clientWidth;
             this.setState({
                 maxScrollLength: newMaxScrollLength
+            }, () => {
+                scrollContainer.addEventListener('scroll', this.debounceScroll);
             })
         });
     }
 
+    componentWillUnmount() {
+        document.getElementsByClassName(`${styles.itemContainer}`)[0].removeEventListener('scroll', this.debounceScroll);
+    }
+    handleScroll(e) {
+        this.setState({
+            scrollPosition: e.target.scrollLeft
+        });
+    }
+    debounceScroll(e) {
+        const currentTime = new Date();
+        if (currentTime - this.state.debounceTimer > 20) {
+            this.setState({
+                debounceTimer: currentTime
+            }, () => {
+                setTimeout(() => {
+                    this.handleScroll(e);
+                }, 20)
+            })
+        }
+
+    }
     scrollRight() {
         const scrollContainer = document.getElementsByClassName(`${styles.itemContainer}`)[0];
         scrollContainer.scrollBy({
