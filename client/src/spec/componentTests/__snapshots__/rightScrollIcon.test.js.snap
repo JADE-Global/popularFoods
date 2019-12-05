@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<RightScrollIcon/> should render properly - snapshot version 1`] = `
+<svg
+  className="prefix__icon_svg"
+  height={24}
+  width={24}
+>
+  <path
+    d="M9.525 5.636L8.11 7.05 13.06 12l-4.95 4.95 1.415 1.414L15.89 12 9.524 5.636z"
+  />
+</svg>
+`;

@@ -2,9 +2,9 @@ import React from 'react';
 import regeneratorRuntime from "regenerator-runtime";
 import { shallow, mount, render } from 'enzyme';
 
-import Carousel from './carousel.jsx';
-import styles from "./carousel.module.css";
-import CarouselItem from '../carouselItem/carouselItem.jsx';
+
+import Carousel from "../../components/carousel/carousel.jsx";
+import CarouselItem from '../../components/carouselItem/carouselItem.jsx';
 
 describe('<Carousel />', () => {
     it('it should exist', () => {
