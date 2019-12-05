@@ -22,7 +22,6 @@ class ModalReview extends Component {
             formattedName = 'Anonymous';
         }
 
-
         return (
             <div>
                 <img src={userAvatar} />
