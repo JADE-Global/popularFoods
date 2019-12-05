@@ -1,4 +1,8 @@
 import React, { Component } from 'react';
+import FriendNumber from './icons/friendNumber.jsx';
+import reviewNumber from './icons/reviewNumber.jsx';
+import styles from './modalReview.module.css';
+import ReviewNumber from './icons/reviewNumber.jsx';
 
 class ModalReview extends Component {
     constructor(props) {
@@ -13,7 +17,7 @@ class ModalReview extends Component {
         this.setState(state => ({ displayFull: !state.displayFull }))
     }
     render() {
-        let { name, friendNumber, reviewNumber, body, dish, stars, date, userAvatar } = this.props;
+        let { name, friendNumber, reviewNumber, body, snippet, dish, stars, date, userAvatar } = this.props;
         let formattedName;
         if (name) {
             let names = name.split(' ');
@@ -23,15 +27,15 @@ class ModalReview extends Component {
         }
 
         return (
-            <div>
-                <img src={userAvatar} />
-                <div>{formattedName}</div>
+            <div className={styles.container}>
+                <img src={userAvatar} className={styles.avatar} />
+                <div className={styles.name}>{formattedName}</div>
                 <div>
                     <div>
-                        {friendNumber}
+                        <FriendNumber /> {friendNumber}
                     </div>
                     <div>
-                        {reviewNumber}
+                        <ReviewNumber /> {reviewNumber}
                     </div>
                 </div>
                 <div>
@@ -39,9 +43,9 @@ class ModalReview extends Component {
                     <div>{date}</div>
                 </div>
                 <div>
-                    {this.state.displayFull ? body : body}
+                    {this.state.displayFull ? body : snippet}
                 </div>
-                <div onClick={this.toggleBody}>{this.state.displayFull ? 'Read less' : 'Read more'}</div>
+                <div className={styles.bodyToggle} onClick={this.toggleBody}>{this.state.displayFull ? 'Read less' : 'Read more'}</div>
             </div>
         )
     }

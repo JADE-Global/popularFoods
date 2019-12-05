@@ -1,0 +1,23 @@
+.container {
+    width:300px;
+    margin-bottom:12px;
+}
+
+.avatar{
+    width:30px;
+    height:30px;
+    border-radius:4px;
+}
+
+.name {
+    color: #333;
+    font-weight: 700;
+}
+
+.bodyToggle {
+    cursor: pointer;
+    color:rgb(0, 115, 187);
+}
+.bodyToggle:hover{
+    text-decoration: underline;
+}
