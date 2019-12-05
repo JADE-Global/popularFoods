@@ -5,43 +5,43 @@ import CarouselItem from '../../components/carouselItem/carouselItem';
 
 describe('<CarouselItem />', () => {
     it('properly renders', () => {
-        const wrapper = shallow(<CarouselItem />);
-        expect(wrapper.exists()).toEqual(true);
+        const component = shallow(<CarouselItem />);
+        expect(component.exists()).toEqual(true);
     });
     it('renders the price', () => {
-        const wrapper = shallow(<CarouselItem
+        const component = shallow(<CarouselItem
             imageUrl={'https://source.unsplash.com/random'}
             price={8.29}
             name={'Galvanize'}
             photoNumber={5}
             reviewNumber={10} />);
-        expect(wrapper.text()).toContain(8.29);
+        expect(component.text()).toContain(8.29);
     });
     it('renders the name', () => {
-        const wrapper = shallow(<CarouselItem
+        const component = shallow(<CarouselItem
             imageUrl={'https://source.unsplash.com/random'}
             price={8.29}
             name={'Galvanize'}
             photoNumber={5}
             reviewNumber={10} />);
-        expect(wrapper.text()).toContain('Galvanize');
+        expect(component.text()).toContain('Galvanize');
     });
     it('renders the photoNumber', () => {
-        const wrapper = shallow(<CarouselItem
+        const component = shallow(<CarouselItem
             imageUrl={'https://source.unsplash.com/random'}
             price={8.29}
             name={'Galvanize'}
             photoNumber={5}
             reviewNumber={10} />);
-        expect(wrapper.text()).toContain(5);
+        expect(component.text()).toContain(5);
     });
     it('renders the reviewNumber', () => {
-        const wrapper = shallow(<CarouselItem
+        const component = shallow(<CarouselItem
             imageUrl={'https://source.unsplash.com/random'}
             price={8.29}
             name={'Galvanize'}
             photoNumber={5}
             reviewNumber={10} />);
-        expect(wrapper.text()).toContain(10);
+        expect(component.text()).toContain(10);
     });
 })
