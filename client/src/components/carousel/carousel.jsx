@@ -60,20 +60,22 @@ class Carousel extends Component {
                     <h4>Popular Dishes</h4>
                     <div className={styles.fakeLink}>View Full Menu</div>
                 </div>
-                <div className={styles.itemContainer}>
+                <div className={styles.scrollContainer}>
                     {this.state.scrollPosition > 2 && <button className={`${styles.scrollButton} ${styles.leftScrollButton}`} onClick={this.scrollLeft}><LeftScrollIcon /></button>}
-                    {this.state.dishes.map((dish, index) => {
-                        return (
-                            <CarouselItem
-                                last={index === this.state.dishes.length - 1 ? true : false}
-                                imageUrl={dish.imageUrl}
-                                price={dish.price}
-                                name={dish.name}
-                                photoNumber={dish.photoNumber}
-                                reviewNumber={dish.reviewNumber}
-                            />
-                        )
-                    })}
+                    <div className={styles.itemContainer}>
+                        {this.state.dishes.map((dish, index) => {
+                            return (
+                                <CarouselItem
+                                    last={index === this.state.dishes.length - 1 ? true : false}
+                                    imageUrl={dish.imageUrl}
+                                    price={dish.price}
+                                    name={dish.name}
+                                    photoNumber={dish.photoNumber}
+                                    reviewNumber={dish.reviewNumber}
+                                />
+                            )
+                        })}
+                    </div>
                     {this.state.maxScrollLength - this.state.scrollPosition > 2 && <button className={`${styles.scrollButton} ${styles.rightScrollButton}`} onClick={this.scrollRight}><RightScrollIcon /></button>}
                 </div>
             </div>

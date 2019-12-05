@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Carousel from './carousel/carousel.jsx';
+import Carousel from './components/carousel/carousel.jsx';
 
 ReactDOM.render(<Carousel
 // imageUrl={'https://source.unsplash.com/random'}
