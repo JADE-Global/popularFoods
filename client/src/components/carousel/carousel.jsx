@@ -15,6 +15,7 @@ class Carousel extends Component {
             maxScrollLength: 0,
             debounceTimer: 0
         }
+        this.carouselWrapper = React.createRef();
         this.scrollLeft = this.scrollLeft.bind(this);
         this.scrollRight = this.scrollRight.bind(this);
         this.handleScroll = this.handleScroll.bind(this);
@@ -57,26 +58,18 @@ class Carousel extends Component {
 
     }
     scrollRight() {
-        const scrollContainer = document.getElementsByClassName(`${styles.itemContainer}`)[0];
-        scrollContainer.scrollBy({
+        this.carouselWrapper.current.scrollBy({
             top: 0,
             left: 100,
             behavior: 'smooth'
         });
-        setTimeout(() => {
-            this.setState({ scrollPosition: document.getElementsByClassName(`${styles.itemContainer}`)[0].scrollLeft })
-        }, 300)
     }
     scrollLeft() {
-        const scrollContainer = document.getElementsByClassName(`${styles.itemContainer}`)[0];
-        scrollContainer.scrollBy({
+        this.carouselWrapper.current.scrollBy({
             top: 0,
             left: -100,
             behavior: 'smooth'
         });
-        setTimeout(() => {
-            this.setState({ scrollPosition: document.getElementsByClassName(`${styles.itemContainer}`)[0].scrollLeft })
-        }, 300)
     }
 
     render() {
@@ -88,7 +81,7 @@ class Carousel extends Component {
                 </div>
                 <div className={styles.scrollContainer}>
                     {this.state.scrollPosition > 2 && <button className={`${styles.scrollButton} ${styles.leftScrollButton}`} onClick={this.scrollLeft}><LeftScrollIcon /></button>}
-                    <div className={styles.itemContainer}>
+                    <div className={styles.itemContainer} ref={this.carouselWrapper}>
                         {this.state.dishes.map((dish, index) => {
                             return (
                                 <CarouselItem
