@@ -1,4 +1,5 @@
-import React, { Component } from 'react';
+import React, { Component, fragment } from 'react';
+import Modal from "../modal/modal.jsx";
 import CarouselItem from '../carouselItem/carouselItem.jsx';
 import LeftScrollIcon from './icons/leftScrollIcon.jsx';
 import RightScrollIcon from './icons/rightScrollIcon.jsx';
@@ -11,6 +12,7 @@ class Carousel extends Component {
         this.state = {
             dishes: [],
             dishToDisplay: '',
+            modalActive: false,
             scrollPosition: 0,
             maxScrollLength: 0,
             debounceTimer: 0
@@ -20,6 +22,8 @@ class Carousel extends Component {
         this.scrollRight = this.scrollRight.bind(this);
         this.handleScroll = this.handleScroll.bind(this);
         this.debounceScroll = this.debounceScroll.bind(this);
+        this.displayModal = this.displayModal.bind(this);
+        this.closeModal = this.closeModal.bind(this);
     }
 
     async componentDidMount() {
@@ -72,30 +76,50 @@ class Carousel extends Component {
         });
     }
 
+    displayModal(name) {
+        this.setState({
+            dishToDisplay: name,
+            modalActive: true
+        })
+    }
+
+    closeModal(e) {
+        if (e.target === e.currentTarget) {
+            this.setState({
+                dishToDisplay: '',
+                modalActive: false
+            })
+        }
+    }
+
     render() {
         return (
-            <div className={styles.container}>
-                <div className={styles.titleContainer}>
-                    <h4>Popular Dishes</h4>
-                    <div className={styles.fakeLink}>View Full Menu</div>
-                </div>
-                <div className={styles.scrollContainer}>
-                    {this.state.scrollPosition > 2 && <button className={`${styles.scrollButton} ${styles.leftScrollButton}`} onClick={this.scrollLeft}><LeftScrollIcon /></button>}
-                    <div className={styles.itemContainer} ref={this.carouselWrapper}>
-                        {this.state.dishes.map((dish, index) => {
-                            return (
-                                <CarouselItem
-                                    last={index === this.state.dishes.length - 1 ? true : false}
-                                    imageUrl={dish.imageUrl}
-                                    price={dish.price}
-                                    name={dish.name}
-                                    photoNumber={dish.photoNumber}
-                                    reviewNumber={dish.reviewNumber}
-                                />
-                            )
-                        })}
+            <div>
+                {this.state.modalActive && <Modal closeModal={this.closeModal} />}
+                <div className={styles.container}>
+                    <div className={styles.titleContainer}>
+                        <h4>Popular Dishes</h4>
+                        <div className={styles.fakeLink}>View Full Menu</div>
                     </div>
-                    {this.state.maxScrollLength - this.state.scrollPosition > 2 && <button className={`${styles.scrollButton} ${styles.rightScrollButton}`} onClick={this.scrollRight}><RightScrollIcon /></button>}
+                    <div className={styles.scrollContainer}>
+                        {this.state.scrollPosition > 2 && <button className={`${styles.scrollButton} ${styles.leftScrollButton}`} onClick={this.scrollLeft}><LeftScrollIcon /></button>}
+                        <div className={styles.itemContainer} ref={this.carouselWrapper}>
+                            {this.state.dishes.map((dish, index) => {
+                                return (
+                                    <CarouselItem
+                                        displayModal={this.displayModal}
+                                        last={index === this.state.dishes.length - 1 ? true : false}
+                                        imageUrl={dish.imageUrl}
+                                        price={dish.price}
+                                        name={dish.name}
+                                        photoNumber={dish.photoNumber}
+                                        reviewNumber={dish.reviewNumber}
+                                    />
+                                )
+                            })}
+                        </div>
+                        {this.state.maxScrollLength - this.state.scrollPosition > 2 && <button className={`${styles.scrollButton} ${styles.rightScrollButton}`} onClick={this.scrollRight}><RightScrollIcon /></button>}
+                    </div>
                 </div>
             </div>
         )

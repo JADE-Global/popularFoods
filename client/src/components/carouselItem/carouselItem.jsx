@@ -4,7 +4,7 @@ import styles from './carouselItem.module.css';
 
 const CarouselItem = ({ last, imageUrl, price, name, photoNumber, reviewNumber, displayModal }) => {
     return (
-        <div className={last ? `${styles.container} ${styles.last}` : styles.container} onClick={displayModal}>
+        <div className={last ? `${styles.container} ${styles.last}` : styles.container} onClick={() => { displayModal(name) }}>
             <div className={styles.foodImage} style={{ backgroundImage: `url(${imageUrl})` }} >
                 <div className={styles.price}>${price}</div>
             </div>

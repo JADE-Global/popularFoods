@@ -1,5 +1,5 @@
 import React from 'react'
-import styles from './modalReviewIcons.module.css';
+// import styles from './modalReviewIcons.module.css';
 
 const FriendNumber = props => (
     <svg width={18} height={18} {...props}>

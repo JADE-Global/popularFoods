@@ -1,6 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import ModalReview from '../../components/modal/modalReview.jsx';
+import ModalReview from '../../components/modal/modalReview/modalReview.jsx';
 
 describe('<ModalReview/>', () => {
     it('properly renders', () => {
