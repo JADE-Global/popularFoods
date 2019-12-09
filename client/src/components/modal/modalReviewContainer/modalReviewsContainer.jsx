@@ -11,10 +11,12 @@ const ModalReviewsContainer = ({ dish, reviewQuantity, reviews }) => {
           Reviews({reviewQuantity})
         </div>
       </div>
-      <div className={styles.reviewsContainer}>
-        {reviews.map(review => {
-          return (
-            <Suspense fallback={<div>Loading ...</div>}>
+      <Suspense
+        fallback={<div className={styles.reviewContainer}>Loading ...</div>}
+      >
+        <div className={styles.reviewsContainer}>
+          {reviews.map(review => {
+            return (
               <ModalReview
                 name={review.name}
                 friendNumber={review.friendNumber}
@@ -26,10 +28,10 @@ const ModalReviewsContainer = ({ dish, reviewQuantity, reviews }) => {
                 date={review.date}
                 userAvatar={review.userAvatar}
               />
-            </Suspense>
-          );
-        })}
-      </div>
+            );
+          })}
+        </div>
+      </Suspense>
       <div className={styles.footerContainer}>
         <div className={styles.footer}>View Menu On Website</div>
       </div>
