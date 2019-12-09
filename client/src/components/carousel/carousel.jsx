@@ -12,6 +12,7 @@ class Carousel extends Component {
         this.state = {
             dishes: [],
             dishToDisplay: '',
+            dishToDisplayIndex: 0,
             modalActive: false,
             scrollPosition: 0,
             maxScrollLength: 0,
@@ -76,10 +77,12 @@ class Carousel extends Component {
         });
     }
 
-    displayModal(name) {
+    displayModal(name, index) {
         this.setState({
             dishToDisplay: name,
-            modalActive: true
+            dishToDisplayIndex: index
+        }, () => {
+            this.setState({ modalActive: true })
         })
     }
 
@@ -95,7 +98,7 @@ class Carousel extends Component {
     render() {
         return (
             <div>
-                {this.state.modalActive && <Modal closeModal={this.closeModal} />}
+                {this.state.modalActive && <Modal dish={this.state.dishToDisplay} dishIndex={this.state.dishToDisplayIndex} closeModal={this.closeModal} />}
                 <div className={styles.container}>
                     <div className={styles.titleContainer}>
                         <h4>Popular Dishes</h4>
@@ -108,6 +111,7 @@ class Carousel extends Component {
                                 return (
                                     <CarouselItem
                                         displayModal={this.displayModal}
+                                        index={index}
                                         last={index === this.state.dishes.length - 1 ? true : false}
                                         imageUrl={dish.imageUrl}
                                         price={dish.price}

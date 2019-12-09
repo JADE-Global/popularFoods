@@ -1,14 +1,19 @@
 import React from 'react';
 import styles from './modalImageDisplay.module.css';
 import PancakeLoader from '../preloaders/pancakeLoader.jsx'
-const ModalImageDisplay = ({ image, caption, imageQuantity }) => {
+import LargeLeftScrollIcon from '../icons/largeLeftScrollIcon.jsx';
+import LargeRightScrollIcon from '../icons/largeRightScrollIcon.jsx';
+const ModalImageDisplay = ({ image, picturesActive, imageIndex, caption, imageQuantity, displayNextImage, displayPreviousImage }) => {
     return (
         <div className={styles.container}>
-            {image ? <React.Fragment>
+            {image && picturesActive ? <React.Fragment>
+                <button className={`${styles.scrollButton} ${styles.leftScrollButton}`} onClick={displayPreviousImage}><LargeLeftScrollIcon /></button>
                 <img className={styles.image} src={image} />
                 <div className={styles.captionContainer}>
                     <div className={styles.caption}>{caption}</div>
+                    <div className={styles.indexTracker}>{imageIndex + 1} of {imageQuantity}</div>
                 </div>
+                <button className={`${styles.scrollButton} ${styles.rightScrollButton}`} onClick={displayNextImage}><LargeRightScrollIcon /></button>
             </React.Fragment> : <PancakeLoader />}
         </div>
     )

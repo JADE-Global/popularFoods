@@ -41,4 +41,5 @@ display:inline-block;
     color:white;
     border-radius:4px;
     cursor: pointer;
+    text-align:center; 
 }
