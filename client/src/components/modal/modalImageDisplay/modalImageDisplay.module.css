@@ -1,49 +1,56 @@
 .container {
-    width:100%;
-    height:calc(100vh - 60px);
-    border-radius: 6px 0px 0px 6px;
-    background-color:black;
-    display:flex;
-    flex-direction: column;
-    position:relative;
-    overflow:auto;
+  width: 100%;
+  min-width: 666px;
+  height: calc(100vh - 60px);
+  border-radius: 6px 0px 0px 6px;
+  background-color: black;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
 }
-.image{
-    max-width:100%;
-    max-height:calc(100% - 54px);
-    margin-top:auto;
-
-}
-.captionContainer{
-    display:grid;
-    height:30px;
-    width:calc(100% - 24px);
-    grid-template-columns: 3fr 1fr;
-    color:white;
-    padding:12px;
+.imageContainer {
+  width: 100%;
+  height: calc(100% - 54px);
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
 }
 
-.indexTracker{
-    text-align:end;
+.image {
+  max-width: 800px;
+  max-height: calc(100% - 54px);
+}
+.captionContainer {
+  display: grid;
+  height: 30px;
+  width: calc(100% - 24px);
+  grid-template-columns: 3fr 1fr;
+  color: white;
+  padding: 12px;
+}
+
+.indexTracker {
+  text-align: end;
 }
 .scrollButton {
-    width:100px;
-    padding:0px;
-    height:100px;
-    position:absolute;
+  width: 100px;
+  padding: 0px;
+  height: 100px;
+  position: absolute;
 }
-.leftScrollButton{
-    right:90%;
-    bottom:50%;
-    background-color:rgba(0,0,0,0);
-    /* z-index:101; */
-    border:none;
-
+.leftScrollButton {
+  right: 90%;
+  bottom: 50%;
+  background-color: rgba(0, 0, 0, 0);
+  /* z-index:101; */
+  border: none;
 }
-.rightScrollButton{
-    padding-left:1px; 
-    left:90%;
-    bottom:50%; 
-    background-color:rgba(0,0,0,0);
-    border:none;
+.rightScrollButton {
+  padding-left: 1px;
+  left: 90%;
+  bottom: 50%;
+  background-color: rgba(0, 0, 0, 0);
+  border: none;
 }

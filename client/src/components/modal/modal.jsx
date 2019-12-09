@@ -63,8 +63,11 @@ class Modal extends Component {
     async fetchDishPictureData() {
         const response = await fetch(`http://localhost:3000/api/tests/${this.state.currentDish.toLowerCase()}`)
         const data = await response.json();
-        this.setState({ pictures: data.pictures }, () => {
-            this.setState({ picturesActive: true });
+        this.setState({
+            pictures: data.pictures,
+            pictureIndex: 0
+        }, () => {
+            this.setState({ picturesActive: true, });
         })
     }
     async componentDidMount() {

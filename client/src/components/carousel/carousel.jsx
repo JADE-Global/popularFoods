@@ -1,6 +1,6 @@
-import React, { Component, fragment } from 'react';
+import React, { Component, Suspense, lazy } from 'react';
 import Modal from "../modal/modal.jsx";
-import CarouselItem from '../carouselItem/carouselItem.jsx';
+const CarouselItem = React.lazy(() => import('../carouselItem/carouselItem.jsx'));
 import LeftScrollIcon from './icons/leftScrollIcon.jsx';
 import RightScrollIcon from './icons/rightScrollIcon.jsx';
 import regeneratorRuntime from "regenerator-runtime";
@@ -109,16 +109,18 @@ class Carousel extends Component {
                         <div className={styles.itemContainer} ref={this.carouselWrapper}>
                             {this.state.dishes.map((dish, index) => {
                                 return (
-                                    <CarouselItem
-                                        displayModal={this.displayModal}
-                                        index={index}
-                                        last={index === this.state.dishes.length - 1 ? true : false}
-                                        imageUrl={dish.imageUrl}
-                                        price={dish.price}
-                                        name={dish.name}
-                                        photoNumber={dish.photoNumber}
-                                        reviewNumber={dish.reviewNumber}
-                                    />
+                                    <Suspense fallback={<div>Loading ... </div>}>
+                                        <CarouselItem
+                                            displayModal={this.displayModal}
+                                            index={index}
+                                            last={index === this.state.dishes.length - 1 ? true : false}
+                                            imageUrl={dish.imageUrl}
+                                            price={dish.price}
+                                            name={dish.name}
+                                            photoNumber={dish.photoNumber}
+                                            reviewNumber={dish.reviewNumber}
+                                        />
+                                    </Suspense>
                                 )
                             })}
                         </div>
