@@ -1,5 +1,5 @@
 import React from 'react'
-import styles from '../modalReview.module.css'
+// import styles from '../modalReview.module.css'
 
 const ReviewNumber = ({ fill }) => (
     <svg width={18} height={18} >

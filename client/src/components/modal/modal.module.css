@@ -1,0 +1,67 @@
+
+.container{
+    margin:0;
+    position:fixed;
+    top:0;      
+    left:0;
+    right:0;
+    bottom:0;
+    overflow:hidden;
+    padding:30px;
+    z-index:99;
+    background-color:rgba(0,0,0,0.5);
+    cursor: pointer;
+}
+.closeButton {
+    position:absolute;
+    right:30px;
+    top:4px;
+    height:24px;
+    text-shadow:0 1px 1px rgba(0,0,0,.8);
+    z-index:100;
+    color:white;
+    cursor: pointer;
+}
+.previousDish{
+    position:absolute;
+    left:30px;
+    bottom:4px;
+    height:24px;
+    text-shadow:0 1px 1px rgba(0,0,0,.8);
+    z-index:100;
+    color:white;
+    display:flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+.nextDish{
+    position:absolute;
+    right:30px;
+    bottom:4px;
+    height:24px;
+    text-shadow:0 1px 1px rgba(0,0,0,.8);
+    z-index:100;
+    color:white;
+    display:flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+.contentContainer {
+    border-radius: 6px;
+    width:100%;
+    height:100%;
+    background-color:white;
+    display:grid;
+    grid-template-columns: 1fr 360px;
+    grid-template-rows: 1fr;
+    /* overflow:hidden  ; */
+}
+/* body .container{
+    width: 100vw;
+    height:100vh;
+    overflow:hidden;
+} */

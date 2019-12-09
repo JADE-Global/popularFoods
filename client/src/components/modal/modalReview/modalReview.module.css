@@ -1,0 +1,52 @@
+.container {
+    width:300px;
+    height:auto;
+    margin-bottom:12px;
+    display: grid;
+    grid-template-columns: 30px, 1fr, 1fr, 1fr, 1fr, 1fr, 1fr;
+    grid-template-rows: 15px, 15px, 15px;
+    grid-gap: 1px;
+    grid-template-areas:
+    'avatar name name  . . . .'
+    'avatar friends reviews . . . .'
+    'stars stars stars  . date date .   '
+    'body body body body body body body'
+    'toggle toggle . . . . .';
+}
+
+.avatar {
+    width:30px;
+    height:30px;
+    border-radius:4px;
+    grid-area: avatar;
+}
+
+.name {
+    color: #333;
+    font-weight: 700;
+    grid-area: name;
+}
+.friends {
+    grid-area: friends;
+}
+
+.reviews{
+    grid-area:reviews;
+}
+.stars {
+    grid-area: stars;
+}
+.date {
+    grid-area: date;
+}
+.body {
+    grid-area: body;
+}
+.bodyToggle {
+    cursor: pointer;
+    color:rgb(0, 115, 187);
+    grid-area: toggle
+}
+.bodyToggle:hover{
+    text-decoration: underline;
+}

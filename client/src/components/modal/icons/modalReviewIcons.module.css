@@ -1,4 +1,8 @@
 .fillColor {
-    fill: rgb(241, 92, 0);
+    fill: rgba(250, 250, 250,0.5);
+}
+.fillColor:hover{
+    fill: rgba(250, 250, 250,1);
+
 }
 
