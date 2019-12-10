@@ -30,7 +30,7 @@ class Carousel extends Component {
   }
 
   async componentDidMount() {
-    const response = await fetch("http://localhost:3000/api/tests/threedish");
+    const response = await fetch("http://localhost:3002/api/tests/threedish");
     const data = await response.json();
     this.setState({ dishes: data.dishes }, () => {
       const scrollContainer = document.getElementsByClassName(
