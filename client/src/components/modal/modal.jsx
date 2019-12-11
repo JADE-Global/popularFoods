@@ -11,25 +11,8 @@ class Modal extends Component {
     super(props);
     this.state = {
       reviews: [],
-      dishes: ["Soup", "Salad", "Chicken", "Dessert"],
-      pictures: [
-        {
-          src: "https://source.unsplash.com/random?food",
-          caption: "This is a test caption for Soup",
-        },
-        {
-          src: "https://source.unsplash.com/random?food",
-          caption: "This is a test caption for Salad",
-        },
-        {
-          src: "https://source.unsplash.com/random?food",
-          caption: "This is a test caption for Chicken",
-        },
-        {
-          src: "https://source.unsplash.com/random?food",
-          caption: "This is a test caption for Desert",
-        },
-      ],
+      dishes: this.props.dishes,
+      pictures: [],
       previousDish: "",
       currentDish: this.props.dish,
       nextDish: "",
@@ -62,7 +45,7 @@ class Modal extends Component {
       state => ({
         dishIndex: state.dishIndex + 1,
         currentDish: state.nextDish,
-        nextDish: state.dishes[state.dishIndex + 2],
+        nextDish: state.dishes[state.dishIndex + 2].name,
         previousDish: state.currentDish,
       }),
       () => {
@@ -76,7 +59,7 @@ class Modal extends Component {
         dishIndex: state.dishIndex - 1,
         currentDish: state.previousDish,
         nextDish: state.currentDish,
-        previousDish: state.dishes[state.dishIndex - 2],
+        previousDish: state.dishes[state.dishIndex - 2].name,
       }),
       () => {
         this.fetchDishPictureData();
@@ -84,13 +67,23 @@ class Modal extends Component {
     );
   }
   async fetchDishPictureData() {
+    let param;
+    for (let i = 0; i < this.state.dishes.length; i++) {
+      if (this.state.dishes[i].name === this.state.currentDish) {
+        param = this.state.dishes[i].id
+
+        break;
+      }
+    }
+
     const response = await fetch(
-      `http://localhost:3002/api/tests/${this.state.currentDish.toLowerCase()}`
+      `http://localhost:3002/api/images/dish/${param}`
     );
     const data = await response.json();
+    console.log(data);
     this.setState(
       {
-        pictures: data.pictures,
+        pictures: data,
         pictureIndex: 0,
       },
       () => {
@@ -121,16 +114,16 @@ class Modal extends Component {
     });
     if (this.state.dishIndex === 0) {
       this.setState(state => ({
-        nextDish: state.dishes[1],
+        nextDish: state.dishes[1].name,
       }));
     } else if (this.state.dishIndex === this.state.dishes.length - 1) {
       this.setState(state => ({
-        previousDish: state.dishes[this.state.dishIndex - 1],
+        previousDish: state.dishes[this.state.dishIndex - 1].name,
       }));
     } else {
       this.setState(state => ({
-        nextDish: state.dishes[this.state.dishIndex + 1],
-        previousDish: state.dishes[this.state.dishIndex - 1],
+        nextDish: state.dishes[this.state.dishIndex + 1].name,
+        previousDish: state.dishes[this.state.dishIndex - 1].name,
       }));
     }
     this.fetchDishPictureData();
@@ -139,7 +132,7 @@ class Modal extends Component {
     let imageSrc;
     let caption;
     if (this.state.picturesActive) {
-      imageSrc = this.state.pictures[this.state.pictureIndex].src;
+      imageSrc = this.state.pictures[this.state.pictureIndex].source;
       caption = this.state.pictures[this.state.pictureIndex].caption;
     } else {
       imageSrc = "";

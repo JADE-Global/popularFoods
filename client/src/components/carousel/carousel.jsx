@@ -14,6 +14,7 @@ class Carousel extends Component {
     this.state = {
       dishes: [],
       dishToDisplay: "",
+      dishToDisplayId: null,
       dishToDisplayIndex: 0,
       modalActive: false,
       scrollPosition: 0,
@@ -30,9 +31,10 @@ class Carousel extends Component {
   }
 
   async componentDidMount() {
-    const response = await fetch("http://localhost:3002/api/tests/threedish");
+    const response = await fetch("http://localhost:3002/api/dishes");
     const data = await response.json();
-    this.setState({ dishes: data.dishes }, () => {
+
+    this.setState({ dishes: data }, () => {
       const scrollContainer = document.getElementsByClassName(
         `${styles.itemContainer}`
       )[0];
@@ -89,10 +91,11 @@ class Carousel extends Component {
     });
   }
 
-  displayModal(name, index) {
+  displayModal(name, index, dishId) {
     this.setState(
       {
         dishToDisplay: name,
+        dishToDisplayId: dishId,
         dishToDisplayIndex: index,
       },
       () => {
@@ -105,6 +108,7 @@ class Carousel extends Component {
     if (e.target === e.currentTarget) {
       this.setState({
         dishToDisplay: "",
+        dishToDisplayId: null,
         modalActive: false,
       });
     }
@@ -115,6 +119,7 @@ class Carousel extends Component {
       <div>
         {this.state.modalActive && (
           <Modal
+            dishes={this.state.dishes}
             dish={this.state.dishToDisplay}
             dishIndex={this.state.dishToDisplayIndex}
             closeModal={this.closeModal}
@@ -147,6 +152,7 @@ class Carousel extends Component {
                       imageUrl={dish.imageUrl}
                       price={dish.price}
                       name={dish.name}
+                      dishId={dish.id}
                       photoNumber={dish.photoNumber}
                       reviewNumber={dish.reviewNumber}
                     />
