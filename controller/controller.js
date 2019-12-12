@@ -49,10 +49,26 @@ module.exports = {
     },
     reviews: {
         getOne: function (req, res) {
-            Reviews.findAll({ limit: 1, include: [Users] })
+            Reviews.findAll({ limit: 1, include: [Users, Dishes] })
                 .then(response => {
-                    console.log(response);
-                    res.status(200).end();
+                    // console.log(response);
+                    res.status(200).end(JSON.stringify(response));
+                })
+                .catch(err => {
+                    console.log(err);
+                    res.status(500).end();
+                })
+        },
+        getReviewsForDish: function (req, res) {
+            Reviews.findAll({
+                include: [Users, {
+                    model: Dishes,
+                    where: { name: req.params.dish }
+                }]
+            })
+                .then(response => {
+                    // console.log(response);
+                    res.status(200).end(JSON.stringify(response));
                 })
                 .catch(err => {
                     console.log(err);

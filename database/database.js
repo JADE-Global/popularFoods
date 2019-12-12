@@ -41,7 +41,7 @@ const Reviews = sequelize.define('reviews', {
         autoIncrement: true,
         primaryKey: true
     },
-    body: Sequelize.STRING,
+    body: Sequelize.TEXT,
     stars: Sequelize.INTEGER,
     userId: Sequelize.INTEGER,
     dishId: Sequelize.INTEGER

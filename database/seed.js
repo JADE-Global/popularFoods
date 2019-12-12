@@ -1,6 +1,6 @@
 const { Users, Restaurants, Reviews, Images, Dishes } = require('./database');
 const faker = require('faker');
-const dishPics = require('./dishPics');
+const { dishPics, dishNames } = require('./dishPics');
 
 const dataGenerators = {
     makeUserEntry: function () {
@@ -12,7 +12,7 @@ const dataGenerators = {
             userGender = 'men';
         }
         const newUserEntry = {
-            name: faker.name.findName(),
+            name: `${faker.name.firstName()} ${faker.name.lastName()}`,
             avatarURL: `https://randomuser.me/api/portraits/thumb/men/${userNumber}.jpg`,
             friendsNumber: Math.floor(Math.random() * 101),
             reviewsNumber: Math.floor(Math.random() * 101)
@@ -56,7 +56,7 @@ const dataGenerators = {
     }
 }
 
-const seedTable = function (entryNumber, makeFunction, table, data) {
+const seedTable = async function (entryNumber, makeFunction, table, data) {
     let promises = [];
     for (let i = 0; i < entryNumber; i++) {
         let dataObject;
@@ -70,14 +70,16 @@ const seedTable = function (entryNumber, makeFunction, table, data) {
             table.create(dataObject)
         )
     }
-    Promise.all(promises)
-        .then((data) => {
-            console.log(`successfully updated table: ${table} with the following: ${data}`)
-        })
-        .catch((err) => {
-            console.log(`Error while seeding data: ${err}`)
-        })
+    return await Promise.all(promises)
+    //         .then((data) => {
+    //             console.log(`successfully updated table: ${table} with the following: ${data}`)
+
+    //         })
+    //         .catch((err) => {
+    //             console.log(`Error while seeding data: ${err}`)
+    //         })
 }
+
 
 const makeImageData = function () {
     let result = [];
@@ -89,12 +91,25 @@ const makeImageData = function () {
     return result;
 }
 const imageData = makeImageData();
-seedTable(100, dataGenerators.makeRestaurantEntry, Restaurants);
-seedTable(50, dataGenerators.makeUserEntry, Users);
-seedTable(100, dataGenerators.makeReviewEntry, Reviews);
-seedTable(Object.keys(dishPics).length, dataGenerators.makeDishEntry, Dishes, Object.keys(dishPics));
-// seedTable(10, dataGenerators.makeDishEntry, Dishes);
-seedTable(imageData.length, dataGenerators.makeImageEntry, Images, imageData);
+
+seedTable(dishNames.length, dataGenerators.makeDishEntry, Dishes, dishNames)
+    .then(async () => {
+        return await seedTable(50, dataGenerators.makeUserEntry, Users);
+
+    })
+    .then(async () => {
+        return await seedTable(100, dataGenerators.makeRestaurantEntry, Restaurants);
+
+    })
+    .then(async () => {
+        return await seedTable(100, dataGenerators.makeReviewEntry, Reviews);
+
+    })
+    .then(async () => {
+        return await seedTable(imageData.length, dataGenerators.makeImageEntry, Images, imageData);
+
+    })
+// seedTable(1, dataGenerators.makeReviewEntry, Reviews);
 
 
 

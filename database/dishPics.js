@@ -154,4 +154,8 @@ const dishPics = {
     ]
 
 }
-module.exports = dishPics;
+const dishNames = ['soup', 'salad', 'chicken', 'dessert', 'chocolate', 'smoothie', 'steak', 'spaghetti', 'berries', 'martini']
+module.exports = {
+    dishPics,
+    dishNames
+}

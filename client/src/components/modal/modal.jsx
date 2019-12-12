@@ -34,7 +34,8 @@ class Modal extends Component {
     }
   }
   displayPreviousImage() {
-    if (this.setState.pictureIndex === 0) {
+
+    if (this.state.pictureIndex === 0) {
       this.setState(state => ({ pictureIndex: state.pictures.length - 1 }));
     } else {
       this.setState(state => ({ pictureIndex: state.pictureIndex - 1 }));
@@ -50,6 +51,8 @@ class Modal extends Component {
       }),
       () => {
         this.fetchDishPictureData();
+        this.fetchDishReviewData();
+
       }
     );
   }
@@ -63,6 +66,7 @@ class Modal extends Component {
       }),
       () => {
         this.fetchDishPictureData();
+        this.fetchDishReviewData();
       }
     );
   }
@@ -70,7 +74,7 @@ class Modal extends Component {
     let param;
     for (let i = 0; i < this.state.dishes.length; i++) {
       if (this.state.dishes[i].name === this.state.currentDish) {
-        param = this.state.dishes[i].id
+        param = this.state.dishes[i].id;
 
         break;
       }
@@ -91,27 +95,14 @@ class Modal extends Component {
       }
     );
   }
+  async fetchDishReviewData() {
+    const response = await fetch(`http://localhost:3002/api/reviews/dish/${this.state.currentDish}`);
+    const data = await response.json();
+    this.setState({ reviews: data })
+  }
   async componentDidMount() {
-    const testData = {
-      name: "Test Name",
-      friendNumber: 4,
-      reviewNumber: 8,
-      dish: "Test Dish",
-      body:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure Potato Pancake dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-      snippet:
-        "Duis aute irure Potato Pancake dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-      stars: 4,
-      date: `${new Date()}`,
-      userAvatar: "https://source.unsplash.com/random?person",
-    };
-    let mockReviews = [];
-    for (let i = 0; i < 50; i++) {
-      mockReviews.push(testData);
-    }
-    this.setState({
-      reviews: mockReviews,
-    });
+
+    this.fetchDishReviewData();
     if (this.state.dishIndex === 0) {
       this.setState(state => ({
         nextDish: state.dishes[1].name,
