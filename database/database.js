@@ -1,9 +1,10 @@
 const Sequelize = require('sequelize');
-const request = require('request');
+// const request = require('request');
 
 const sequelize = new Sequelize('populardishes', 'root', '', {
-    host: 'localhost',
-    dialect: 'mysql'
+    host: 'database',
+    dialect: 'mysql',
+    logging: false,
 });
 
 // return sequelize.query('DROP DATABASE IF EXISTS yelp').then(() => {
