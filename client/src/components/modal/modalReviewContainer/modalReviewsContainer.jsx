@@ -18,15 +18,15 @@ const ModalReviewsContainer = ({ dish, reviewQuantity, reviews }) => {
           {reviews.map(review => {
             return (
               <ModalReview
-                name={review.name}
-                friendNumber={review.friendNumber}
-                reviewNumber={review.reviewNumber}
-                dish={review.dish}
+                name={review.user.name}
+                friendNumber={review.user.friendsNumber}
+                reviewNumber={review.user.reviewsNumber}
+                dish={review.dish.name}
                 body={review.body}
-                snippet={review.snippet}
+                // snippet={review.snippet}
                 stars={review.stars}
-                date={review.date}
-                userAvatar={review.userAvatar}
+                date={review.createdAt}
+                userAvatar={review.user.avatarURL}
               />
             );
           })}

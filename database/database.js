@@ -1,7 +1,7 @@
 const Sequelize = require('sequelize');
 const request = require('request');
 
-const sequelize = new Sequelize('yelp', 'root', '', {
+const sequelize = new Sequelize('populardishes', 'root', '', {
     host: 'localhost',
     dialect: 'mysql'
 });
@@ -23,6 +23,7 @@ const Users = sequelize.define('users', {
         primaryKey: true
     },
     name: Sequelize.STRING,
+    avatarURL: Sequelize.STRING,
     friendsNumber: Sequelize.INTEGER,
     reviewsNumber: Sequelize.INTEGER
 });
@@ -40,10 +41,10 @@ const Reviews = sequelize.define('reviews', {
         autoIncrement: true,
         primaryKey: true
     },
-    body: Sequelize.STRING,
+    body: Sequelize.TEXT,
     stars: Sequelize.INTEGER,
-    userId: Sequelize.STRING,
-    dishId: Sequelize.STRING
+    userId: Sequelize.INTEGER,
+    dishId: Sequelize.INTEGER
 })
 const Dishes = sequelize.define('dishes', {
     id: {
@@ -53,7 +54,9 @@ const Dishes = sequelize.define('dishes', {
     },
     name: Sequelize.STRING,
     price: Sequelize.DECIMAL,
-    restuarantId: Sequelize.STRING
+    restaurantId: Sequelize.INTEGER,
+    photoNumber: Sequelize.INTEGER,
+    reviewNumber: Sequelize.INTEGER
 })
 const Images = sequelize.define('images', {
     id: {
@@ -63,8 +66,16 @@ const Images = sequelize.define('images', {
     },
     source: Sequelize.STRING,
     caption: Sequelize.STRING,
-    dishId: Sequelize.STRING
+    dishId: Sequelize.INTEGER
 })
+Dishes.hasMany(Images);
+Images.belongsTo(Dishes);
+Dishes.hasMany(Reviews);
+Reviews.belongsTo(Dishes);
+Users.hasMany(Reviews);
+Reviews.belongsTo(Users);
+
+
 Users.sync();
 Restaurants.sync();
 Reviews.sync();

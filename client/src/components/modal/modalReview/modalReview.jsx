@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import moment from 'moment';
 import FriendNumber from '../icons/friendNumber.jsx';
 import ReviewNumber from '../icons/reviewNumber.jsx';
@@ -8,7 +8,8 @@ class ModalReview extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            displayFull: false
+            displayFull: false,
+            snippet: '',
         }
         this.toggleBody = this.toggleBody.bind(this);
     }
@@ -16,12 +17,17 @@ class ModalReview extends Component {
     toggleBody() {
         this.setState(state => ({ displayFull: !state.displayFull }))
     }
+    componentDidMount() {
+        let newSnippet = `${this.props.body.slice(0, 230)}...`;
+        this.setState({ snippet: newSnippet });
+    }
     render() {
-        let { name, friendNumber, reviewNumber, body, snippet, dish, stars, date, userAvatar } = this.props;
+        let { name, friendNumber, reviewNumber, dish, body, stars, date, userAvatar } = this.props;
         let formattedName;
         if (name) {
             let names = name.split(' ');
-            formattedName = `${names[0]} ${names[1].charAt(0)}.`;
+            formattedName = `${names[0]} ${names[1].charAt(0)
+                }.`;
         } else {
             formattedName = 'Anonymous';
         }
@@ -49,7 +55,7 @@ class ModalReview extends Component {
                 })}</div>
                 <div className={styles.date}>{moment(date).format("M/D/YYYY")}</div>
                 <div className={styles.body}>
-                    {this.state.displayFull ? body : snippet}
+                    {this.state.displayFull ? <React.Fragment><b>{dish}</b> {body}</React.Fragment> : <React.Fragment><b>{dish}</b> {this.state.snippet}</React.Fragment>}
                 </div>
                 <div className={styles.bodyToggle} onClick={this.toggleBody}>{this.state.displayFull ? 'Read less' : 'Read more'}</div>
             </div>
