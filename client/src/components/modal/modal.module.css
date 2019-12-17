@@ -22,6 +22,9 @@
     color:white;
     cursor: pointer;
 }
+.closeButton:hover {
+    text-decoration: underline;
+}
 .previousDish{
     position:absolute;
     left:30px;
@@ -35,6 +38,9 @@
     justify-content: center;
     align-items: center;
     cursor: pointer;
+}
+.previousDish:hover {
+    text-decoration: underline;
 }
 .nextDish{
     position:absolute;
@@ -50,6 +56,9 @@
     align-items: center;
     cursor: pointer;
 }
+.nextDish:hover {
+    text-decoration: underline;
+}
 .contentContainer {
     border-radius: 6px;
     width:100%;
@@ -59,10 +68,10 @@
     display:grid;
     grid-template-columns: 1fr 360px;
     grid-template-rows: 1fr;
-    /* overflow:hidden  ; */
+    cursor:default;
 }
 /* body .container{
     width: 100vw;
-    height:100vh;
+    height:100vh;   
     overflow:hidden;
 } */

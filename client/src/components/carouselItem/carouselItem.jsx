@@ -11,7 +11,7 @@ class CarouselItem extends Component {
         }
     }
     async componentDidMount() {
-        const response = await fetch(`http://localhost:3002/api/images/thumbnail/${this.props.dishId}`);
+        const response = await fetch(`http://52.52.88.215/api/images/thumbnail/${this.props.dishId}`);
         const data = await response.json();
         this.setState({
             imageUrl: data[0].source

@@ -81,7 +81,7 @@ class Modal extends Component {
     }
 
     const response = await fetch(
-      `http://localhost:3002/api/images/dish/${param}`
+      `http://52.52.88.215/api/images/dish/${param}`
     );
     const data = await response.json();
     console.log(data);
@@ -96,7 +96,7 @@ class Modal extends Component {
     );
   }
   async fetchDishReviewData() {
-    const response = await fetch(`http://localhost:3002/api/reviews/dish/${this.state.currentDish}`);
+    const response = await fetch(`http://52.52.88.215/api/reviews/dish/${this.state.currentDish}`);
     const data = await response.json();
     this.setState({ reviews: data })
   }

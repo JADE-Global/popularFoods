@@ -1,18 +1,17 @@
 const Sequelize = require('sequelize');
-// const request = require('request');
+const { database, user, password } = require('../config.js');
 
-const sequelize = new Sequelize('populardishes', 'root', '', {
+
+const sequelize = new Sequelize(database, user, password, {
     host: 'database',
     dialect: 'mysql',
     logging: false,
 });
 
-// return sequelize.query('DROP DATABASE IF EXISTS yelp').then(() => {
 
-//     sequelize.query('CREATE DATABASE `yelp`;').then(data => {
 sequelize.authenticate()
     .then(() => {
-        console.log('connected to yelp db');
+        console.log('connected to popularDishes db');
     })
     .catch((err) => {
         console.log('Unable to connect to the database:', err);
@@ -68,23 +67,19 @@ const Images = sequelize.define('images', {
     source: Sequelize.STRING,
     caption: Sequelize.STRING,
     dishId: Sequelize.INTEGER
+
 })
-Dishes.hasMany(Images);
 Images.belongsTo(Dishes);
-Dishes.hasMany(Reviews);
+Dishes.hasMany(Images);
 Reviews.belongsTo(Dishes);
-Users.hasMany(Reviews);
+Dishes.hasMany(Reviews);
 Reviews.belongsTo(Users);
+Users.hasMany(Reviews);
 
-
-Users.sync();
-Restaurants.sync();
-Reviews.sync();
-Dishes.sync();
-Images.sync();
 
 
 module.exports = {
+    sequelize,
     Users,
     Restaurants,
     Reviews,

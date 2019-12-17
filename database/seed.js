@@ -1,4 +1,4 @@
-const { Users, Restaurants, Reviews, Images, Dishes } = require('./database');
+const { Users, Restaurants, Reviews, Images, Dishes, sequelize } = require('./database');
 const faker = require('faker');
 const { dishPics, dishNames } = require('./dishPics');
 
@@ -70,14 +70,14 @@ const seedTable = async function (entryNumber, makeFunction, table, data) {
             table.create(dataObject)
         )
     }
-    return await Promise.all(promises)
-    //         .then((data) => {
-    //             console.log(`successfully updated table: ${table} with the following: ${data}`)
+    return Promise.all(promises)
+        .then((data) => {
+            console.log(`successfully updated table: ${table} with the following: ${data}`)
 
-    //         })
-    //         .catch((err) => {
-    //             console.log(`Error while seeding data: ${err}`)
-    //         })
+        })
+        .catch((err) => {
+            console.log(`Error while seeding data: ${err}`)
+        })
 }
 
 
@@ -91,24 +91,30 @@ const makeImageData = function () {
     return result;
 }
 const imageData = makeImageData();
+const syncTables = async function () {
+    return await sequelize.sync({ force: true });
+}
+syncTables().then(() => {
+    seedTable(dishNames.length, dataGenerators.makeDishEntry, Dishes, dishNames)
+        .then(async () => {
+            return seedTable(50, dataGenerators.makeUserEntry, Users)
+                .then(async () => {
+                    return seedTable(100, dataGenerators.makeRestaurantEntry, Restaurants)
+                        .then(async () => {
+                            return seedTable(100, dataGenerators.makeReviewEntry, Reviews)
+                                .then(async () => {
+                                    return seedTable(imageData.length, dataGenerators.makeImageEntry, Images, imageData);
 
-seedTable(dishNames.length, dataGenerators.makeDishEntry, Dishes, dishNames)
-    .then(async () => {
-        return await seedTable(50, dataGenerators.makeUserEntry, Users);
+                                })
 
-    })
-    .then(async () => {
-        return await seedTable(100, dataGenerators.makeRestaurantEntry, Restaurants);
+                        })
 
-    })
-    .then(async () => {
-        return await seedTable(100, dataGenerators.makeReviewEntry, Reviews);
+                })
 
-    })
-    .then(async () => {
-        return await seedTable(imageData.length, dataGenerators.makeImageEntry, Images, imageData);
+        })
+})
 
-    })
+
 // seedTable(1, dataGenerators.makeReviewEntry, Reviews);
 
 

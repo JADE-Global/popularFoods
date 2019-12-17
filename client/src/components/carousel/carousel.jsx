@@ -18,7 +18,7 @@ class Carousel extends Component {
       dishToDisplayIndex: 0,
       modalActive: false,
       scrollPosition: 0,
-      maxScrollLength: 0,
+      maxScrollLength: 4,
       debounceTimer: 0,
     };
     this.carouselWrapper = React.createRef();
@@ -31,24 +31,14 @@ class Carousel extends Component {
   }
 
   async componentDidMount() {
-    const response = await fetch("http://localhost:3002/api/dishes");
+    const response = await fetch("http://52.52.88.215/api/dishes");
     const data = await response.json();
 
     this.setState({ dishes: data }, () => {
-      const scrollContainer = document.getElementsByClassName(
-        `${styles.itemContainer}`
-      )[0];
-      const newMaxScrollLength =
-        scrollContainer.scrollWidth - scrollContainer.clientWidth;
-      this.setState(
-        {
-          maxScrollLength: newMaxScrollLength,
-        },
-        () => {
-          scrollContainer.addEventListener("scroll", this.debounceScroll);
-        }
-      );
-    });
+      this.carouselWrapper.current.addEventListener("scroll", this.debounceScroll);
+    }
+    );
+
   }
 
   componentWillUnmount() {
@@ -57,9 +47,14 @@ class Carousel extends Component {
       .removeEventListener("scroll", this.debounceScroll);
   }
   handleScroll(e) {
-    this.setState({
-      scrollPosition: e.target.scrollLeft,
-    });
+    const scrollContainer = this.carouselWrapper.current;
+    const newMaxScrollLength =
+      scrollContainer.scrollWidth - scrollContainer.clientWidth;
+    this.setState(
+      {
+        maxScrollLength: newMaxScrollLength,
+        scrollPosition: e.target.scrollLeft,
+      })
   }
   debounceScroll(e) {
     const currentTime = new Date();
@@ -79,14 +74,14 @@ class Carousel extends Component {
   scrollRight() {
     this.carouselWrapper.current.scrollBy({
       top: 0,
-      left: 100,
+      left: 224,
       behavior: "smooth",
     });
   }
   scrollLeft() {
     this.carouselWrapper.current.scrollBy({
       top: 0,
-      left: -100,
+      left: -224,
       behavior: "smooth",
     });
   }
